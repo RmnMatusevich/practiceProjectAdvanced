@@ -17,7 +17,7 @@ class Collage extends React.Component {
   }
 
   render() {
-    const props = {
+    const obj = {
       collage: [
         {
           src:
@@ -65,7 +65,7 @@ class Collage extends React.Component {
     };
 
     const newCollageObj = [];
-    const items = props.collage;
+    const items = obj.collage;
     for (let item of items) {
       if (item.description.toLocaleLowerCase().includes(this.state.userInput)) {
         newCollageObj.push(item);
@@ -89,7 +89,7 @@ class Collage extends React.Component {
                 src={i.src}
                 tittle={i.tittle}
                 description={i.description}
-                key={props.collage.indexOf(i)}
+                key={obj.collage.indexOf(i)}
               />
             );
           })}
