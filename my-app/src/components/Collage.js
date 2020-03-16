@@ -2,15 +2,20 @@ import React from "react";
 import CollageItem from "./CollageItem";
 
 class Collage extends React.Component {
-  search(text) {
-    const newCollageObj = [];
-    this.props.collage.map(i => {
-      if (i.description.toLocaleLowerCase().includes(text)) {
-        newCollageObj.push(i);
-      }
-    });
-    return newCollageObj;
+  constructor() {
+    super();
+    this.state = {
+      userInput: ""
+    };
+    this.handleChange = this.handleChange.bind(this);
   }
+
+  handleChange(e) {
+    this.setState({
+      userInput: e.target.value
+    });
+  }
+
   render() {
     const props = {
       collage: [
@@ -58,19 +63,38 @@ class Collage extends React.Component {
         }
       ]
     };
+
+    const newCollageObj = [];
+    const items = props.collage;
+    for (let item of items) {
+      if (item.description.toLocaleLowerCase().includes(this.state.userInput)) {
+        newCollageObj.push(item);
+      }
+    }
     return (
-      <div className="collage">
-        {props.collage.map(i => {
-          return (
-            <CollageItem
-              src={i.src}
-              tittle={i.tittle}
-              description={i.description}
-              key={props.collage.indexOf(i)}
-            />
-          );
-        })}
-      </div>
+      <React.Fragment>
+        <form id="search">
+          <label id="search-label">Search</label>
+          <input
+            type="search"
+            id="search-input"
+            onChange={this.handleChange}
+            value={this.state.userInput}
+          />
+        </form>
+        <div className="collage">
+          {newCollageObj.map(i => {
+            return (
+              <CollageItem
+                src={i.src}
+                tittle={i.tittle}
+                description={i.description}
+                key={props.collage.indexOf(i)}
+              />
+            );
+          })}
+        </div>
+      </React.Fragment>
     );
   }
 }

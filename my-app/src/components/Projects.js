@@ -2,6 +2,18 @@ import React from "react";
 import Collage from "./Collage";
 
 class Projects extends React.Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      userInput: ""
+    };
+    this.handleChange = this.handleChange.bind(this);
+  }
+  handleChange(e) {
+    this.setState({
+      userInput: e.target.value
+    });
+  }
   render() {
     return (
       <section className="main-projects">
@@ -12,10 +24,7 @@ class Projects extends React.Component {
           <b>Spring Project</b> to help you build it. Start small and use just
           what you need—<b>Spring is modular by design.</b>
         </p>
-        <form id="search">
-          <label id="search-label">Search</label>
-          <input type="search" id="search-input" onInput={Collage.search} />
-        </form>
+
         <Collage />
       </section>
     );
