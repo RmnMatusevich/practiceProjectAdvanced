@@ -1,21 +1,48 @@
 import React from "react";
 import CollageItem from "./CollageItem";
-
 class Collage extends React.Component {
   constructor() {
     super();
     this.state = {
-      userInput: ""
+      userInput: "",
+      image: "",
+      tittle: "",
+      description: "",
+      collage: []
     };
     this.handleChange = this.handleChange.bind(this);
+    this.handleChangeImage = this.handleChangeImage.bind(this);
+    this.handleChangeTittle = this.handleChangeTittle.bind(this);
+    this.handleChangeDescription = this.handleChangeDescription.bind(this);
   }
-
+  handleChangeImage(e) {
+    this.setState({
+      image: e.target.value
+    });
+  }
+  handleChangeTittle(e) {
+    this.setState({
+      tittle: e.target.value
+    });
+  }
+  handleChangeDescription(e) {
+    this.setState({
+      description: e.target.value
+    });
+  }
   handleChange(e) {
     this.setState({
       userInput: e.target.value
     });
   }
 
+  btnClick(obj) {
+    obj.collage.push({
+      src: this.state.image,
+      tittle: this.state.tittle,
+      description: this.state.description
+    });
+  }
   render() {
     const obj = {
       collage: [
@@ -65,12 +92,15 @@ class Collage extends React.Component {
     };
 
     const newCollageObj = [];
-    const items = obj.collage;
+    this.state.collage.length = 0;
+    let items = obj.collage;
     for (let item of items) {
       if (item.description.toLocaleLowerCase().includes(this.state.userInput)) {
         newCollageObj.push(item);
+        this.state.collage.push(item);
       }
     }
+
     return (
       <React.Fragment>
         <form id="search">
@@ -82,8 +112,28 @@ class Collage extends React.Component {
             value={this.state.userInput}
           />
         </form>
+        <form id="adding-collage">
+          <label>Upload photo</label>
+          <input id="photo-src" onChange={this.handleChangeImage}></input>
+          <label>Tittle</label>
+          <input id="title-input" onChange={this.handleChangeTittle}></input>
+          <label>Description</label>
+          <input
+            id="description-input"
+            onChange={this.handleChangeDescription}
+          ></input>
+          <button
+            id="submit-button"
+            type="button"
+            onClick={() => {
+              this.btnClick(obj);
+            }}
+          >
+            Submit
+          </button>
+        </form>{" "}
         <div className="collage">
-          {newCollageObj.map(i => {
+          {this.state.collage.map(i => {
             return (
               <CollageItem
                 src={i.src}
