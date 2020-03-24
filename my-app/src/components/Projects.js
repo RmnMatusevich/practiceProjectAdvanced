@@ -12,6 +12,7 @@ class Projects extends React.Component {
       userInput: e.target.value
     });
   }
+
   render() {
     return (
       <section className="main-projects">
