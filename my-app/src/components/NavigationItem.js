@@ -1,10 +1,10 @@
 import React from "react";
 
-const NavigationItem = text => {
+const NavigationItem = props => {
   return (
     <li className="navigation-item">
       <a href="#top" className="navigation-item__link">
-        {text.text}
+        {props.text}
       </a>
     </li>
   );
