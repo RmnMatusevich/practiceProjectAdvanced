@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import CollageItem from "./CollageItem";
 const obj = {
   collage: [
@@ -47,108 +47,87 @@ const obj = {
   ]
 };
 
-class Collage extends React.Component {
-  constructor() {
-    super();
-    this.state = {
-      userInput: "",
-      image: "",
-      tittle: "",
-      description: "",
-      collage: [...obj.collage]
-    };
-    this.handleChange = this.handleChange.bind(this);
-    this.handleChangeImage = this.handleChangeImage.bind(this);
-    this.handleChangeTittle = this.handleChangeTittle.bind(this);
-    this.handleChangeDescription = this.handleChangeDescription.bind(this);
-  }
+function Collage() {
+  const [userInput, setUserInput] = useState("");
+  const [image, setImage] = useState("");
+  const [tittle, setTittle] = useState("");
+  const [description, setDescription] = useState("");
+  const [collage, setCollage] = useState([...obj.collage]);
 
-  handleChangeImage(e) {
-    this.setState({
-      image: e.target.value
-    });
-  }
-  handleChangeTittle(e) {
-    this.setState({
-      tittle: e.target.value
-    });
-  }
-  handleChangeDescription(e) {
-    this.setState({
-      description: e.target.value
-    });
-  }
-  handleChange(e) {
-    this.setState({
-      userInput: e.target.value
-    });
-
-    this.setState({ collage: [] });
+  const handleChangeImage = e => {
+    setImage(e.target.value);
+  };
+  const handleChangeTittle = e => {
+    setTittle(e.target.value);
+  };
+  const handleChangeDescription = e => {
+    setDescription(e.target.value);
+  };
+  const handleChange = e => {
+    setUserInput(e.target.value);
 
     const newCollageObj = [];
     for (let item of obj.collage) {
-      if (item.description.toLocaleLowerCase().includes(this.state.userInput)) {
+      if (item.description.toLocaleLowerCase().includes(userInput)) {
         newCollageObj.push(item);
       }
     }
-    this.setState({ collage: newCollageObj });
-  }
+    setCollage(newCollageObj);
+  };
 
-  btnClick(obj) {
+  const btnClick = obj => {
     obj.collage.push({
-      src: this.state.image,
-      tittle: this.state.tittle,
-      description: this.state.description
+      src: image,
+      tittle: tittle,
+      description: description
     });
-    this.setState({ collage: obj.collage });
-  }
-  render() {
-    return (
-      <React.Fragment>
-        <form id="search">
-          <label id="search-label">Search</label>
-          <input
-            type="search"
-            id="search-input"
-            onChange={this.handleChange}
-            value={this.state.userInput}
-          />
-        </form>
-        <form id="adding-collage">
-          <label>Upload photo</label>
-          <input id="photo-src" onChange={this.handleChangeImage}></input>
-          <label>Tittle</label>
-          <input id="title-input" onChange={this.handleChangeTittle}></input>
-          <label>Description</label>
-          <input
-            id="description-input"
-            onChange={this.handleChangeDescription}
-          ></input>
-          <button
-            id="submit-button"
-            type="button"
-            onClick={() => {
-              this.btnClick(obj);
-            }}
-          >
-            Submit
-          </button>
-        </form>{" "}
-        <div className="collage">
-          {this.state.collage.map(i => {
-            return (
-              <CollageItem
-                src={i.src}
-                tittle={i.tittle}
-                description={i.description}
-                key={obj.collage.indexOf(i)}
-              />
-            );
-          })}
-        </div>
-      </React.Fragment>
-    );
-  }
+    setCollage(obj.collage);
+  };
+  return (
+    <React.Fragment>
+      <form id="search">
+        <label id="search-label">Search</label>
+        <input
+          type="search"
+          id="search-input"
+          onChange={handleChange}
+          value={userInput}
+        />
+      </form>
+      <form id="adding-collage">
+        <label>Upload photo</label>
+        <input id="photo-src" onChange={handleChangeImage}></input>
+        <label>Tittle</label>
+        <input id="title-input" onChange={handleChangeTittle}></input>
+        <label>Description</label>
+        <input
+          id="description-input"
+          onChange={handleChangeDescription}
+        ></input>
+        <button
+          id="submit-button"
+          type="button"
+          onClick={() => {
+            btnClick(obj);
+          }}
+        >
+          Submit
+        </button>
+      </form>{" "}
+      <div className="collage">
+        {collage.map(i => {
+          return (
+            <CollageItem
+              src={i.src}
+              tittle={i.tittle}
+              description={i.description}
+              key={obj.collage.indexOf(i)}
+            />
+          );
+        })}
+      </div>
+    </React.Fragment>
+  );
 }
 
 export default Collage;

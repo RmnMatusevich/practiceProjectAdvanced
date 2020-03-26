@@ -1,11 +1,11 @@
 import React from "react";
 
-const CollageItem = obj => {
+const CollageItem = props => {
   return (
     <div className="collage-item">
-      <img className="collage-image" src={obj.src} alt="Collage icon" />
-      <h6 className="collage-tittle">{obj.tittle}</h6>
-      <p className="collage-description">{obj.description}</p>
+      <img className="collage-image" src={props.src} alt="Collage icon" />
+      <h6 className="collage-tittle">{props.tittle}</h6>
+      <p className="collage-description">{props.description}</p>
     </div>
   );
 };
