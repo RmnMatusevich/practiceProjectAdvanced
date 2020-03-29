@@ -9,7 +9,6 @@ function Navigation() {
 
   const openHide = () => {
     setVisibility(!visibility);
-    console.log(visibility);
   };
   return (
     <nav>
