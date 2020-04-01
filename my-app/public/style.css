@@ -369,6 +369,7 @@ nav {
 }
 
 .login {
+  margin-top: 25px;
 }
 
 #login-form {
@@ -378,30 +379,39 @@ nav {
   border: 2px solid black;
   border-radius: 10px;
   display: flex;
-  flex-flow: column;
+  flex-direction: column;
   justify-content: space-evenly;
 }
 
 #username {
   width: 90%;
   height: 50px;
-  margin: auto;
   font-family: "Open Sans", sans-serif;
   font-size: 26px;
+  margin: 0 auto;
 }
 
 #password {
   width: 90%;
   height: 50px;
-  margin: auto;
   font-family: "Open Sans", sans-serif;
   font-size: 26px;
+  margin: 0 auto;
 }
 
 #login-submit {
   width: 100px;
   height: 50px;
-  margin: auto;
   font-family: "Open Sans", sans-serif;
   font-size: 26px;
+  margin: 0 auto;
+  font-weight: 600;
+}
+
+.login-form__label {
+  display: block;
+  text-align: center;
+  font-family: "Open Sans", sans-serif;
+  font-size: 36px;
+  font-weight: 600;
 }

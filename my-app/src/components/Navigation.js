@@ -1,20 +1,31 @@
-import React, { useState } from "react";
+import React from "react";
+import { useSelector, useDispatch } from "react-redux";
 import NavigationItem from "./NavigationItem";
 import Logo from "./Logo";
+const ACTION_CHANGE_VISIBILITY = "ACTION_CHANGE_VISIBILITY";
 const nav = {
   obj: ["Projects", "Guides", "Blog", "Training and Certification"]
 };
-function Navigation() {
-  const [visibility, setVisibility] = useState(false);
-
-  const openHide = () => {
-    setVisibility(!visibility);
+function setVisibility(visibility) {
+  let newVisibility = !visibility;
+  return {
+    type: ACTION_CHANGE_VISIBILITY,
+    newVisibility
   };
+}
+function Navigation() {
+  const dispatch = useDispatch();
+  const visibility = useSelector(state => state.navigationVisibility);
+
   return (
     <nav>
       <Logo />
       <div className="mob-menu">
-        <a href="#top" className="menu-button" onClick={openHide}>
+        <a
+          href="#top"
+          className="menu-button"
+          onClick={() => dispatch(setVisibility(visibility))}
+        >
           <span></span>
         </a>
         {visibility && (

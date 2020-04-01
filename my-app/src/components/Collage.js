@@ -1,5 +1,8 @@
-import React, { useState } from "react";
+import React from "react";
 import CollageItem from "./CollageItem";
+import { useSelector, useDispatch } from "react-redux";
+import store from "../index";
+
 const obj = {
   collage: [
     {
@@ -47,41 +50,69 @@ const obj = {
   ]
 };
 
+const ACTION_CHANGE_USER_INPUT = "ACTION_CHANGE_USER_INPUT";
+const ACTION_CHANGE_IMAGE = "ACTION_CHANGE_IMAGE";
+const ACTION_CHANGE_TITTLE = "ACTION_CHANGE_TITTLE";
+const ACTION_CHANGE_DESCRIPTION = "ACTION_CHANGE_DESCRIPTION";
+const ACTION_CHANGE_COLLAGE = "ACTION_CHANGE_COLLAGE";
+
 function Collage() {
-  const [userInput, setUserInput] = useState("");
-  const [image, setImage] = useState("");
-  const [tittle, setTittle] = useState("");
-  const [description, setDescription] = useState("");
-  const [collage, setCollage] = useState([...obj.collage]);
+  const dispatch = useDispatch();
+  const image = useSelector(state => state.collageImage);
+  const tittle = useSelector(state => state.collageTittle);
+  const description = useSelector(state => state.collageDescription);
+  const collage = useSelector(state => state.collageCollage);
 
-  const handleChangeImage = e => {
-    setImage(e.target.value);
-  };
-  const handleChangeTittle = e => {
-    setTittle(e.target.value);
-  };
-  const handleChangeDescription = e => {
-    setDescription(e.target.value);
-  };
-  const handleChange = e => {
-    setUserInput(e.target.value);
+  function setImage(image) {
+    return {
+      type: ACTION_CHANGE_IMAGE,
+      image
+    };
+  }
+  function setTittle(tittle) {
+    return {
+      type: ACTION_CHANGE_TITTLE,
+      tittle
+    };
+  }
+  function setDescription(description) {
+    return {
+      type: ACTION_CHANGE_DESCRIPTION,
+      description
+    };
+  }
+  function setUserInput(userInput) {
+    return {
+      type: ACTION_CHANGE_USER_INPUT,
+      userInput
+    };
+  }
+  function setCollage(collage) {
+    return {
+      type: ACTION_CHANGE_COLLAGE,
+      collage
+    };
+  }
 
+  const handleChange = input => {
+    dispatch(setUserInput(input));
     const newCollageObj = [];
     for (let item of obj.collage) {
-      if (item.description.toLocaleLowerCase().includes(userInput)) {
+      if (item.description.toLocaleLowerCase().includes(input)) {
         newCollageObj.push(item);
       }
     }
-    setCollage(newCollageObj);
+    dispatch(setCollage(newCollageObj));
+    console.log(store.getState());
   };
 
-  const btnClick = obj => {
+  const btnClick = () => {
     obj.collage.push({
       src: image,
       tittle: tittle,
       description: description
     });
-    setCollage(obj.collage);
+    dispatch(setCollage(obj.collage));
   };
   return (
     <React.Fragment>
@@ -90,25 +121,30 @@ function Collage() {
         <input
           type="search"
           id="search-input"
-          onChange={handleChange}
-          value={userInput}
+          onChange={event => handleChange(event.target.value)}
         />
       </form>
       <form id="adding-collage">
         <label>Upload photo</label>
-        <input id="photo-src" onChange={handleChangeImage}></input>
+        <input
+          id="photo-src"
+          onChange={event => dispatch(setImage(event.target.value))}
+        ></input>
         <label>Tittle</label>
-        <input id="title-input" onChange={handleChangeTittle}></input>
+        <input
+          id="title-input"
+          onChange={event => dispatch(setTittle(event.target.value))}
+        ></input>
         <label>Description</label>
         <input
           id="description-input"
-          onChange={handleChangeDescription}
+          onChange={event => dispatch(setDescription(event.target.value))}
         ></input>
         <button
           id="submit-button"
           type="button"
           onClick={() => {
-            btnClick(obj);
+            btnClick();
           }}
         >
           Submit
