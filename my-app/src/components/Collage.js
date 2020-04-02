@@ -1,7 +1,6 @@
 import React from "react";
 import CollageItem from "./CollageItem";
 import { useSelector, useDispatch } from "react-redux";
-import store from "../index";
 
 const obj = {
   collage: [
@@ -103,7 +102,6 @@ function Collage() {
       }
     }
     dispatch(setCollage(newCollageObj));
-    console.log(store.getState());
   };
 
   const btnClick = () => {
