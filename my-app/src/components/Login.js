@@ -1,14 +1,12 @@
 import React from "react";
 import { Redirect } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
-import store from "../index";
 
 const ACTION_CHANGE_AUTHORISED = "ACTION_CHANGE_AUTHORISED";
 const ACTION_CHANGE_USERNAME = "ACTION_CHANGE_USERNAME";
 const ACTION_CHANGE_PASSWORD = "ACTION_CHANGE_PASSWORD";
 
 function setUsername(username) {
-  console.log(store.getState());
   return {
     type: ACTION_CHANGE_USERNAME,
     username

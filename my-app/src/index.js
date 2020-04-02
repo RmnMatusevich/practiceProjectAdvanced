@@ -86,7 +86,6 @@ const rootReducer = (state = initialState, action) => {
   }
 };
 const store = createStore(rootReducer);
-console.log(store.getState().loginUsername);
 
 ReactDOM.render(
   <Provider store={store}>

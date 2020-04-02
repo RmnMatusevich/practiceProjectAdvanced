@@ -2,7 +2,6 @@ import React from "react";
 import { useSelector, useDispatch } from "react-redux";
 import NavigationItem from "./NavigationItem";
 import Logo from "./Logo";
-import store from "../index";
 
 const ACTION_CHANGE_NAVIGATION_VISIBILITY =
   "ACTION_CHANGE_NAVIGATION_VISIBILITY";
@@ -15,7 +14,6 @@ function Navigation() {
   let visibility = useSelector(state => state.navigationVisibility);
 
   function setVisibility() {
-    console.log(store.getState());
     return {
       type: ACTION_CHANGE_NAVIGATION_VISIBILITY,
       visibility: !visibility
