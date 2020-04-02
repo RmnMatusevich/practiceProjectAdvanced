@@ -157,7 +157,7 @@ function Collage() {
               src={i.src}
               tittle={i.tittle}
               description={i.description}
-              key={obj.collage.indexOf(i)}
+              key={obj.collage.indexOf(i) * Math.random()}
             />
           );
         })}
