@@ -56,43 +56,43 @@ const ACTION_CHANGE_TITTLE = "ACTION_CHANGE_TITTLE";
 const ACTION_CHANGE_DESCRIPTION = "ACTION_CHANGE_DESCRIPTION";
 const ACTION_CHANGE_COLLAGE = "ACTION_CHANGE_COLLAGE";
 
+function setImage(image) {
+  return {
+    type: ACTION_CHANGE_IMAGE,
+    image
+  };
+}
+function setTittle(tittle) {
+  return {
+    type: ACTION_CHANGE_TITTLE,
+    tittle
+  };
+}
+function setDescription(description) {
+  return {
+    type: ACTION_CHANGE_DESCRIPTION,
+    description
+  };
+}
+function setUserInput(userInput) {
+  return {
+    type: ACTION_CHANGE_USER_INPUT,
+    userInput
+  };
+}
+function setCollage(collage) {
+  return {
+    type: ACTION_CHANGE_COLLAGE,
+    collage
+  };
+}
+
 function Collage() {
   const dispatch = useDispatch();
   const image = useSelector(state => state.collageImage);
   const tittle = useSelector(state => state.collageTittle);
   const description = useSelector(state => state.collageDescription);
   const collage = useSelector(state => state.collageCollage);
-
-  function setImage(image) {
-    return {
-      type: ACTION_CHANGE_IMAGE,
-      image
-    };
-  }
-  function setTittle(tittle) {
-    return {
-      type: ACTION_CHANGE_TITTLE,
-      tittle
-    };
-  }
-  function setDescription(description) {
-    return {
-      type: ACTION_CHANGE_DESCRIPTION,
-      description
-    };
-  }
-  function setUserInput(userInput) {
-    return {
-      type: ACTION_CHANGE_USER_INPUT,
-      userInput
-    };
-  }
-  function setCollage(collage) {
-    return {
-      type: ACTION_CHANGE_COLLAGE,
-      collage
-    };
-  }
 
   const handleChange = input => {
     dispatch(setUserInput(input));
@@ -107,12 +107,18 @@ function Collage() {
   };
 
   const btnClick = () => {
+    let newObj = [...collage];
     obj.collage.push({
       src: image,
       tittle: tittle,
       description: description
     });
-    dispatch(setCollage(obj.collage));
+    newObj.push({
+      src: image,
+      tittle: tittle,
+      description: description
+    });
+    dispatch(setCollage(newObj));
   };
   return (
     <React.Fragment>
