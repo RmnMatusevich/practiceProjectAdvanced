@@ -2,23 +2,16 @@ import React from "react";
 import { useSelector, useDispatch } from "react-redux";
 import NavigationItem from "./NavigationItem";
 import Logo from "./Logo";
+import { setVisibility } from "./redux/actions/navActions";
 
-const ACTION_CHANGE_NAVIGATION_VISIBILITY =
-  "ACTION_CHANGE_NAVIGATION_VISIBILITY";
 const nav = {
-  obj: ["Projects", "Guides", "Blog", "Training and Certification"]
+  obj: ["Projects", "Guides", "Blog", "Training and Certification"],
 };
 
 function Navigation() {
   const dispatch = useDispatch();
-  let visibility = useSelector(state => state.navigationVisibility);
+  let visibility = useSelector((state) => state.nav.navigationVisibility);
 
-  function setVisibility() {
-    return {
-      type: ACTION_CHANGE_NAVIGATION_VISIBILITY,
-      visibility: !visibility
-    };
-  }
   return (
     <nav>
       <Logo />
@@ -26,14 +19,14 @@ function Navigation() {
         <a
           href="#top"
           className="menu-button"
-          onClick={() => dispatch(setVisibility())}
+          onClick={() => dispatch(setVisibility(visibility))}
         >
           <span></span>
         </a>
         {visibility && (
           <ul className="mob-navigation">
             {visibility &&
-              nav.obj.map(i => {
+              nav.obj.map((i) => {
                 return <NavigationItem text={i} key={nav.obj.indexOf(i)} />;
               })}
           </ul>
@@ -41,7 +34,7 @@ function Navigation() {
       </div>
       <div className="menu">
         <ul className="navigation">
-          {nav.obj.map(i => {
+          {nav.obj.map((i) => {
             return <NavigationItem text={i} key={nav.obj.indexOf(i)} />;
           })}
         </ul>
