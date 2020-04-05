@@ -125,9 +125,12 @@ nav {
   height: 40px;
   border: 2px solid black;
   border-radius: 5px;
+  outline: none;
+  transition: 0.3s ease;
 }
+
 #search-input:focus {
-  background-color: rgb(226, 222, 216);
+  background-color: rgb(224, 255, 214);
 }
 
 .collage {
@@ -303,6 +306,8 @@ nav {
   }
 }
 
+/*    ADD NEW BLOCK TO THE COLLAGE    */
+
 .text {
   width: 100px;
   height: 50px;
@@ -338,6 +343,12 @@ nav {
   font-size: 26px;
   width: 80%;
   margin: 0 auto;
+  outline: none;
+  transition: 0.3s ease;
+}
+
+#photo-src:focus {
+  background-color: rgb(224, 255, 214);
 }
 
 #title-input {
@@ -347,6 +358,12 @@ nav {
   font-size: 26px;
   width: 80%;
   margin: 0 auto;
+  outline: none;
+  transition: 0.3s ease;
+}
+
+#title-input:focus {
+  background-color: rgb(224, 255, 214);
 }
 
 #description-input {
@@ -356,6 +373,12 @@ nav {
   font-size: 26px;
   width: 80%;
   margin: 0 auto;
+  outline: none;
+  transition: 0.3s ease;
+}
+
+#description-input:focus {
+  background-color: rgb(224, 255, 214);
 }
 
 #submit-button {
@@ -366,52 +389,113 @@ nav {
   margin: 0 auto;
   margin-bottom: 10px;
   font-size: 26px;
+  outline: none;
 }
 
+/*    LOGIN:    */
+
 .login {
-  margin-top: 25px;
+  width: 100%;
+}
+
+.green-blur {
+  position: absolute;
+  top: -200px;
+  width: 100%;
+  height: 500px;
+  background-image: url("./images/IntersectComp.png");
+  background-repeat: no-repeat;
+  background-size: cover;
 }
 
 #login-form {
+  margin-top: 600px;
   width: 500px;
   height: 900px;
   margin: auto;
-  border: 2px solid black;
-  border-radius: 10px;
   display: flex;
   flex-direction: column;
-  justify-content: space-evenly;
+  justify-content: center;
 }
 
 #username {
-  width: 90%;
+  width: 100%;
   height: 50px;
   font-family: "Open Sans", sans-serif;
   font-size: 26px;
-  margin: 0 auto;
+  margin-bottom: 10px;
+  border: 1px solid #5c5c5c;
+  box-sizing: border-box;
+  border-radius: 7px;
+  outline: none;
 }
 
 #password {
-  width: 90%;
+  width: 100%;
   height: 50px;
   font-family: "Open Sans", sans-serif;
   font-size: 26px;
-  margin: 0 auto;
+  margin-bottom: 40px;
+  border: 1px solid #5c5c5c;
+  box-sizing: border-box;
+  border-radius: 7px;
+  outline: none;
 }
 
 #login-submit {
-  width: 100px;
+  width: 100%;
   height: 50px;
   font-family: "Open Sans", sans-serif;
   font-size: 26px;
   margin: 0 auto;
   font-weight: 600;
+  background: #4fca08;
+  border-radius: 10px;
+  transition: 0.3s ease;
+}
+
+#login-submit:hover {
+  border: 1px solid black;
+  color: white;
+  background: black;
 }
 
 .login-form__label {
   display: block;
-  text-align: center;
   font-family: "Open Sans", sans-serif;
-  font-size: 36px;
+  font-size: 26px;
   font-weight: 600;
+  margin-bottom: 10px;
+}
+
+@media (max-width: 800px) {
+  .green-blur {
+    position: absolute;
+    top: -300px;
+    width: 100%;
+    height: 452px;
+    background-image: url("./images/Intersect.png");
+    background-repeat: no-repeat;
+    background-size: cover;
+  }
+  .login {
+  }
+
+  .#login-form {
+  }
+
+  #username {
+  }
+
+  #password {
+  }
+
+  #login-submit {
+  }
+
+  .login-form__label {
+    font-family: Roboto, sans-serif;
+    font-size: 16px;
+    line-height: 19px;
+  }
 }

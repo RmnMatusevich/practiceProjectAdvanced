@@ -26,19 +26,20 @@ function Login() {
 
   return (
     <section className="login" onSubmit={click}>
+      <div className="green-blur"></div>
       <form id="login-form">
-        <label className="login-form__label">USERNAME</label>
+        <label className="login-form__label">Username</label>
         <input
           id="username"
           onChange={(event) => dispatch(setUsername(event.target.value))}
         ></input>
-        <label className="login-form__label">PASSWORD</label>
+        <label className="login-form__label">Password</label>
         <input
           id="password"
           type="password"
           onChange={(event) => dispatch(setPassword(event.target.value))}
         ></input>
-        <button id="login-submit">LogIn</button>
+        <button id="login-submit">Log In</button>
       </form>
     </section>
   );
