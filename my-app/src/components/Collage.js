@@ -2,11 +2,11 @@ import React from "react";
 import CollageItem from "./CollageItem";
 import { useSelector, useDispatch } from "react-redux";
 import {
-  setCollage,
-  setImage,
-  setDescription,
-  setTittle,
-  setUserInput,
+  setCollageThunk,
+  setDescriptionThunk,
+  setUserInputThunk,
+  setImageThunk,
+  setTittleThunk,
 } from "./redux/actions/collageActions";
 import obj from "./collageObject";
 
@@ -18,14 +18,14 @@ function Collage() {
   const collage = useSelector((state) => state.collage.collageCollage);
 
   const handleChange = (input) => {
-    dispatch(setUserInput(input));
+    dispatch(setUserInputThunk(input));
     const newCollageObj = [];
     for (let item of obj.collage) {
       if (item.description.toLocaleLowerCase().includes(input)) {
         newCollageObj.push(item);
       }
     }
-    dispatch(setCollage(newCollageObj));
+    dispatch(setCollageThunk(newCollageObj));
   };
 
   const btnClick = () => {
@@ -40,7 +40,7 @@ function Collage() {
       tittle: tittle,
       description: description,
     });
-    dispatch(setCollage(newObj));
+    dispatch(setCollageThunk(newObj));
   };
   return (
     <React.Fragment>
@@ -56,17 +56,19 @@ function Collage() {
         <label>Upload photo</label>
         <input
           id="photo-src"
-          onChange={(event) => dispatch(setImage(event.target.value))}
+          onChange={(event) => dispatch(setImageThunk(event.target.value))}
         ></input>
         <label>Tittle</label>
         <input
           id="title-input"
-          onChange={(event) => dispatch(setTittle(event.target.value))}
+          onChange={(event) => dispatch(setTittleThunk(event.target.value))}
         ></input>
         <label>Description</label>
         <input
           id="description-input"
-          onChange={(event) => dispatch(setDescription(event.target.value))}
+          onChange={(event) =>
+            dispatch(setDescriptionThunk(event.target.value))
+          }
         ></input>
         <button
           id="submit-button"

@@ -2,9 +2,9 @@ import React from "react";
 import { Redirect } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
 import {
-  setAuthorised,
-  setPassword,
-  setUsername,
+  setAuthorisedThunk,
+  setPasswordThunk,
+  setUsernameThunk,
 } from "./redux/actions/loginActions";
 
 function Login() {
@@ -16,7 +16,7 @@ function Login() {
   const click = (event) => {
     event.preventDefault();
     if (username === "admin" && password === "1234") {
-      dispatch(setAuthorised(true));
+      dispatch(setAuthorisedThunk(true));
     }
   };
   if (authorised) {
@@ -31,13 +31,13 @@ function Login() {
         <label className="login-form__label">Username</label>
         <input
           id="username"
-          onChange={(event) => dispatch(setUsername(event.target.value))}
+          onChange={(event) => dispatch(setUsernameThunk(event.target.value))}
         ></input>
         <label className="login-form__label">Password</label>
         <input
           id="password"
           type="password"
-          onChange={(event) => dispatch(setPassword(event.target.value))}
+          onChange={(event) => dispatch(setPasswordThunk(event.target.value))}
         ></input>
         <button id="login-submit">Log In</button>
       </form>

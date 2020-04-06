@@ -6,6 +6,49 @@ import {
   ACTION_CHANGE_COLLAGE,
 } from "../globalVariables";
 
+function setImageThunk(image) {
+  return (dispatch, getState) => {
+    console.log(`Action type: ${setImage(image).type}`);
+    console.log(`Before update ${getState().collage.collageImage}`);
+    dispatch(setImage(image));
+    console.log(`After update ${getState().collage.collageImage}`);
+  };
+}
+
+function setTittleThunk(tittle) {
+  return (dispatch, getState) => {
+    console.log(`Action type: ${setTittle(tittle).type}`);
+    console.log(`Before update ${getState().collage.collageTittle}`);
+    dispatch(setTittle(tittle));
+    console.log(`After update ${getState().collage.collageTittle}`);
+  };
+}
+
+function setDescriptionThunk(description) {
+  return (dispatch, getState) => {
+    console.log(`Action type: ${setDescription(description).type}`);
+    console.log(`Before update ${getState().collage.collageDescription}`);
+    dispatch(setDescription(description));
+    console.log(`After update ${getState().collage.collageDescription}`);
+  };
+}
+
+function setCollageThunk(collage) {
+  return (dispatch, getState) => {
+    console.log(`Action type: ${setTittle(collage).type}`);
+    console.log(getState().collage.collageCollage);
+    dispatch(setCollage(collage));
+    console.log(getState().collage.collageCollage);
+  };
+}
+function setUserInputThunk(userInput) {
+  return (dispatch, getState) => {
+    console.log(`Action type: ${setUserInput(userInput).type}`);
+    dispatch(setUserInput(userInput));
+    console.log(`After update ${userInput}`);
+  };
+}
+
 function setImage(image) {
   return {
     type: ACTION_CHANGE_IMAGE,
@@ -37,4 +80,10 @@ function setCollage(collage) {
   };
 }
 
-export { setCollage, setDescription, setImage, setTittle, setUserInput };
+export {
+  setUserInputThunk,
+  setImageThunk,
+  setTittleThunk,
+  setDescriptionThunk,
+  setCollageThunk,
+};
